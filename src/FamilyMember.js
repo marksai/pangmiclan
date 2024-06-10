@@ -1,16 +1,26 @@
 // src/FamilyMember.js
 import React, { useState } from 'react';
 import DetailModal from './FamilyDetail';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faEdit } from '@fortawesome/free-solid-svg-icons';
 
 const FamilyMember = ({ member, onSelect }) => {
   const [isVisible, setIsVisible] = useState(false);
-
-
+  const[modalIsOpen, setModalIsOpen]=useState(false);
+  const [currentNode, setCurrentNode] = useState(member);
+  
+  const closeModal = () => {
+    setModalIsOpen(false);
+  };
   const handleToggleVisibility = () => {
     setIsVisible(!isVisible);
   };
 
-
+  const onEditClick = (member) =>{
+    console.log("modal open");
+    setCurrentNode({ member });
+    setModalIsOpen(true);
+  };
   return (
     <div className="family-member">
       <div className="member-info" onClick={() => onSelect(member)}>
@@ -18,6 +28,7 @@ const FamilyMember = ({ member, onSelect }) => {
           {member.name} {isVisible ? '▼' : '▶'}
         </h4>
         {member.spouse && <span>Spouse: {member.spouse}</span>}
+        <FontAwesomeIcon icon={faEdit} className="edit-icon" onClick={() => onEditClick(member)}  />
       
       </div>
       {isVisible && member.children.length > 0 && (
@@ -27,7 +38,12 @@ const FamilyMember = ({ member, onSelect }) => {
           ))}
         </div>
       )}
-      
+       <DetailModal
+        isOpen={modalIsOpen}
+        onRequestClose={closeModal}
+        selectedMember={member}
+     
+      />
     </div>
   );
 };
