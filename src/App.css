@@ -1,0 +1,25 @@
+.App {
+  font-family: Arial, sans-serif;
+  margin: 20px;
+  text-align: center;
+}
+
+h1 {
+  text-align: center;
+}
+
+ul {
+  list-style-type: none;
+  padding-left: 0;
+}
+
+li {
+  margin: 10px 0;
+}
+
+div.node {
+  border: 1px solid #ddd;
+  padding: 10px;
+  border-radius: 4px;
+  display: inline-block;
+}
