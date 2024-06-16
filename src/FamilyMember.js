@@ -24,11 +24,16 @@ const FamilyMember = ({ member, onSelect }) => {
   return (
     <div className="family-member">
       <div className="member-info" onClick={() => onSelect(member)}>
+        <span style={{display: 'flex', justifyContent: 'right'}}>
+        <FontAwesomeIcon icon={faEdit} className="edit-icon" onClick={() => onEditClick(member)}  />
+        </span>
+     
         <h4 onClick={handleToggleVisibility}>
           {member.name} {isVisible ? '▼' : '▶'}
+          
         </h4>
         {member.spouse && <span>Spouse: {member.spouse}</span>}
-        <FontAwesomeIcon icon={faEdit} className="edit-icon" onClick={() => onEditClick(member)}  />
+        
       
       </div>
       {isVisible && member.children.length > 0 && (

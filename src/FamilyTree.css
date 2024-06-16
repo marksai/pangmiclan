@@ -5,6 +5,9 @@
   margin: 10px;
   cursor: pointer;
 }
+.closeIcon{
+  text-align: right;
+}
 
 .title{
   align-items: center;
