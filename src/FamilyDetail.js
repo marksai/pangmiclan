@@ -22,6 +22,11 @@ const DetailModal = ({ isOpen, onRequestClose,selectedMember }) => {
     setEditScreen(false);
   };
 
+  const onAddChild = (selectedMember) =>{
+    console.log(selectedMember);
+
+  };
+
   const handleChange = (event) => {
     console.log("changing");
     console.log(event.target.value);
@@ -90,6 +95,7 @@ const DetailModal = ({ isOpen, onRequestClose,selectedMember }) => {
           <p>
             <strong>Name: </strong>{selectedMember.name} <br />
             <strong>Born:</strong>{selectedMember.dob? selectedMember.dob : 'N/A'}<br />
+            <strong>Known As:</strong>{selectedMember.knownas? selectedMember.knownas : 'N/A'}<br />
             <strong>Spouse:</strong> {selectedMember.spouse ? selectedMember.spouse : 'N/A'}
             
             </p>
@@ -102,8 +108,13 @@ const DetailModal = ({ isOpen, onRequestClose,selectedMember }) => {
                 ))}
               </ul>
             </div>
+        
             
           )}
+            <br />
+            <Button variant="contained" color="secondary" type="button" onClick={() => onAddChild(selectedMember)}> 
+                    Add Child
+            </Button>
         </div>
       }
 
