@@ -10,7 +10,7 @@ const App = () => {
 
 
   useEffect(() => {
-    const apiUrl = 'https://localhost:7208/api/FamilyTree/GetFamilyTree';
+    const apiUrl = 'https://pangmiclan-webapi.azurewebsites.net/api/FamilyTree/GetFamilyTree';
     fetch(apiUrl) 
       .then((response) => response.json())
       .then((data) => setFamilyTree(data))

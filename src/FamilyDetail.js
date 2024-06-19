@@ -12,6 +12,8 @@ const DetailModal = ({ isOpen, onRequestClose,selectedMember }) => {
   const [name, setName] = useState(selectedMember);
   const [dob, setDOB] = useState(selectedMember);
   const [spouse, setSpouse] = useState(selectedMember);
+  const [otherinfo, setOtherInfo] = useState(selectedMember);
+  const [children,setAddChild]=useState(selectedMember);
   const onEditClick = () =>{
     console.log("edit screen");
     setEditScreen(true);
@@ -23,6 +25,23 @@ const DetailModal = ({ isOpen, onRequestClose,selectedMember }) => {
   };
 
   const onAddChild = (selectedMember) =>{
+    console.log(selectedMember);
+    var res='';
+    if(selectedMember.children.length>0)
+    {
+        var lastId=selectedMember.children[selectedMember.children.length-1].id;
+        var newId=parseInt(lastId.charAt(lastId.length - 1))+1;
+        res = selectedMember.id+"."+newId ;
+    }
+    else
+    {
+      res=selectedMember.id+".1";
+    }
+    console.log(res);
+    var val={ id: res, name: "--",dob:"--",spouse:"--",knownas:"--",otherinfo:"--", children: [] };
+    selectedMember.children.push(val);
+    
+    //setAddChild(addChildToTree(selectedMember));
     console.log(selectedMember);
 
   };
@@ -43,14 +62,14 @@ const DetailModal = ({ isOpen, onRequestClose,selectedMember }) => {
     console.log(selectedMember);
     
     try {
-      const response = await fetch('https://localhost:7208/api/FamilyTree/put/'+selectedMember.id, {
+      const response = await fetch('https://pangmiclan-webapi.azurewebsites.net/api/FamilyTree/put/'+selectedMember.id, {
         method: 'PUT',
         headers: {
           'Content-Type': 'application/json'
         },
         body: JSON.stringify(selectedMember)
       });
-
+      setEditScreen(false);
       if (!response.ok) {
         throw new Error('Network response was not ok');
       }
@@ -96,7 +115,8 @@ const DetailModal = ({ isOpen, onRequestClose,selectedMember }) => {
             <strong>Name: </strong>{selectedMember.name} <br />
             <strong>Born:</strong>{selectedMember.dob? selectedMember.dob : 'N/A'}<br />
             <strong>Known As:</strong>{selectedMember.knownas? selectedMember.knownas : 'N/A'}<br />
-            <strong>Spouse:</strong> {selectedMember.spouse ? selectedMember.spouse : 'N/A'}
+            <strong>Spouse:</strong> {selectedMember.spouse ? selectedMember.spouse : 'N/A'}<br />
+            <strong>Other Info:</strong> {selectedMember.otherinfo ? selectedMember.otherinfo : 'N/A'}
             
             </p>
             {selectedMember.children.length > 0 && (
@@ -135,6 +155,19 @@ const DetailModal = ({ isOpen, onRequestClose,selectedMember }) => {
                     >
           </TextField>
           <br /> <br />
+          <TextField id="name" name="knownas" label="Known As"
+                      value={selectedMember.knownas}
+                      style={{ width: 350 }}
+                      onChange={
+                        (event)=>{
+                          const val=event.target.value;
+                          selectedMember.knownas=event.target.value;
+                          setName(val);
+                        }
+                      }
+                    >
+          </TextField>
+          <br /> <br />
           <TextField id="dob" name="dob" label="Born in (year)"
                       value={selectedMember.dob}
                       style={{ width: 350 }}
@@ -157,6 +190,19 @@ const DetailModal = ({ isOpen, onRequestClose,selectedMember }) => {
                           const val=event.target.value;
                           selectedMember.spouse=event.target.value;
                           setSpouse(val);
+                        }
+                      }
+                    >
+          </TextField>
+          <br /> <br />
+          <TextField id="otherinfo" name="otherinfo" label="Other Info"
+                      value={selectedMember.otherinfo}
+                      style={{ width: 350 }}
+                      onChange={
+                        (event)=>{
+                          const val=event.target.value;
+                          selectedMember.otherinfo=event.target.value;
+                          setOtherInfo(val);
                         }
                       }
                     >
