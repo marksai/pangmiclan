@@ -43,7 +43,7 @@ const DetailModal = ({ isOpen, onRequestClose,selectedMember }) => {
     console.log(selectedMember);
     
     try {
-      const response = await fetch('https://localhost:7208/api/FamilyTree/put/'+selectedMember.id, {
+      const response = await fetch('https://pangmiclan-webapi.azurewebsites.net/api/FamilyTree/put/'+selectedMember.id, {
         method: 'PUT',
         headers: {
           'Content-Type': 'application/json'
