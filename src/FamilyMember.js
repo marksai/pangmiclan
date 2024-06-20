@@ -7,7 +7,7 @@ import { faEdit } from '@fortawesome/free-solid-svg-icons';
 const FamilyMember = ({ member, onSelect }) => {
   const [isVisible, setIsVisible] = useState(false);
   const[modalIsOpen, setModalIsOpen]=useState(false);
-  const [currentNode, setCurrentNode] = useState(member);
+  //const [currentNode, setCurrentNode] = useState(member);
   
   const closeModal = () => {
     setModalIsOpen(false);
@@ -18,7 +18,7 @@ const FamilyMember = ({ member, onSelect }) => {
 
   const onEditClick = (member) =>{
     console.log("modal open");
-    setCurrentNode({ member });
+    //setCurrentNode({ member });
     setModalIsOpen(true);
   };
   return (

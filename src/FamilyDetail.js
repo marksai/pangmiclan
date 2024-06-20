@@ -1,19 +1,21 @@
 import React, { useState }  from 'react';
 import Modal from 'react-modal';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faEdit,faClose, faAlignRight } from '@fortawesome/free-solid-svg-icons';
+import { faEdit,faClose } from '@fortawesome/free-solid-svg-icons';
 import { TextField,Button } from '@mui/material';
 
 Modal.setAppElement('#root'); // Bind modal to the app root
 
 const DetailModal = ({ isOpen, onRequestClose,selectedMember }) => {
   const [showEdit,setEditScreen] = useState(false);
-  const [inputs, setInputs] = useState({});
+  //const [inputs, setInputs] = useState({});
   const [name, setName] = useState(selectedMember);
   const [dob, setDOB] = useState(selectedMember);
   const [spouse, setSpouse] = useState(selectedMember);
   const [otherinfo, setOtherInfo] = useState(selectedMember);
-  const [children,setAddChild]=useState(selectedMember);
+  const [knownas, setKnownAs] = useState(selectedMember);
+  
+  //const [children,setAddChild]=useState(selectedMember);
   const onEditClick = () =>{
     console.log("edit screen");
     setEditScreen(true);
@@ -45,7 +47,7 @@ const DetailModal = ({ isOpen, onRequestClose,selectedMember }) => {
     console.log(selectedMember);
 
   };
-
+/*
   const handleChange = (event) => {
     console.log("changing");
     console.log(event.target.value);
@@ -56,6 +58,7 @@ const DetailModal = ({ isOpen, onRequestClose,selectedMember }) => {
 
     setInputs(values => ({...values, [name]: value}))
   };
+  */
   const handleSubmit = async (event) => {
     event.preventDefault();
     console.log("submit");
@@ -162,7 +165,7 @@ const DetailModal = ({ isOpen, onRequestClose,selectedMember }) => {
                         (event)=>{
                           const val=event.target.value;
                           selectedMember.knownas=event.target.value;
-                          setName(val);
+                          setKnownAs(val);
                         }
                       }
                     >

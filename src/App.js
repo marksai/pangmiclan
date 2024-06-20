@@ -2,11 +2,11 @@
 import React, { useEffect, useState } from 'react';
 import FamilyTree from './FamilyTree';
 import './FamilyTree.css';
-import DetailModal from './FamilyDetail';
+//import DetailModal from './FamilyDetail';
 
 const App = () => {
   const [familyTree, setFamilyTree] = useState(null);
-  const [selectedMember, setSelectedMember] = useState(null);
+  //const [selectedMember, setSelectedMember] = useState(null);
 
 
   useEffect(() => {
