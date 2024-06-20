@@ -1,0 +1,27 @@
+[
+{
+    "id":"1",
+    "name": "Grandparent",
+    "details": "Details about Grandparent",
+    "children": [
+      {
+        "id":"1.1",
+        "name": "Parent 1",
+        "details": "Details about Parent 1",
+        "children": [
+          { "id":"1.1.1","name": "Child 1.1", "details": "Details about Child 1.1", "children": [] },
+          { "id":"1.1.2","name": "Child 1.2", "details": "Details about Child 1.2", "children": [] }
+        ]
+      },
+      {
+        "id":"1.2",
+        "name": "Parent 2",
+        "details": "Details about Parent 2",
+        "children": [
+          { "id":"1.2.1","name": "Child 2.1", "details": "Details about Child 2.1", "children": [] },
+          { "id":"1.2.2","name": "Child 2.2", "details": "Details about Child 2.2", "children": [] }
+        ]
+      }
+    ]
+  }
+]
