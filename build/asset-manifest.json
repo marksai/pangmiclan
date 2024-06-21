@@ -1,0 +1,15 @@
+{
+  "files": {
+    "main.css": "/pangmiclan/static/css/main.58d20ed2.css",
+    "main.js": "/pangmiclan/static/js/main.59b32f52.js",
+    "static/js/453.6ebab931.chunk.js": "/pangmiclan/static/js/453.6ebab931.chunk.js",
+    "index.html": "/pangmiclan/index.html",
+    "main.58d20ed2.css.map": "/pangmiclan/static/css/main.58d20ed2.css.map",
+    "main.59b32f52.js.map": "/pangmiclan/static/js/main.59b32f52.js.map",
+    "453.6ebab931.chunk.js.map": "/pangmiclan/static/js/453.6ebab931.chunk.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.58d20ed2.css",
+    "static/js/main.59b32f52.js"
+  ]
+}
