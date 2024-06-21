@@ -4,7 +4,7 @@ import FamilyMember from './FamilyMember';
 
 const FamilyTree = ({ members, onSelect }) => {
   return (
-    <div className="family-tree">
+    <div>
       {members.map((member) => (
         <FamilyMember key={member.id} member={member} onSelect={onSelect} />
       ))}

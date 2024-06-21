@@ -1,3 +1,5 @@
+
+
 .family-member {
   display: flex;
   flex-direction: column;
@@ -74,4 +76,48 @@
   background-color: #f9f9f9;
 }
 
+.modalDetail {
+  top: 50%;
+  left: 50%;
+  right: 50%;
+  bottom: 50%;
+  transform: translate(-50%, -50%);
+  width: 60%;
+  height: 50%;
+  padding: 20px;
+}
+
+@media screen and (max-width: 768px) {
+  h4 {
+    font-size:3vw;
+  }
+  
+  p {
+    font-size:2vw;
+  }
+  
+  ul {
+    font-size:2vw;
+  }
+
+  .family-member {
+    display: flex;
+    flex-direction: column;
+    flex-flow: column wrap;
+    align-items: center;
+    margin: 3px;
+    cursor: pointer;
+  }
+
+  .modalDetail {
+    top: 50%;
+    left: 50%;
+    right: 50%;
+    bottom: 50%;
+    transform: translate(-50%, -50%);
+    width: 60%;
+    height: 50%;
+    padding: 10px;
+  }
+}
 

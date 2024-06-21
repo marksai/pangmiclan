@@ -22,6 +22,7 @@ const FamilyMember = ({ member, onSelect }) => {
     setModalIsOpen(true);
   };
   return (
+    
     <div className="family-member">
       <div className="member-info" onClick={() => onSelect(member)}>
         <span style={{display: 'flex', justifyContent: 'right'}}>
@@ -32,7 +33,10 @@ const FamilyMember = ({ member, onSelect }) => {
           {member.name} {isVisible ? '▼' : '▶'}
           
         </h4>
-        {member.spouse && <span>Spouse: {member.spouse}</span>}
+    <p>
+    {member.spouse && <span>Spouse: {member.spouse}</span>}
+    </p>
+        
         
       
       </div>
@@ -47,8 +51,9 @@ const FamilyMember = ({ member, onSelect }) => {
         isOpen={modalIsOpen}
         onRequestClose={closeModal}
         selectedMember={member}
-     
+           
       />
+     
     </div>
   );
 };

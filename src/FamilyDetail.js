@@ -3,10 +3,15 @@ import Modal from 'react-modal';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faEdit,faClose } from '@fortawesome/free-solid-svg-icons';
 import { TextField,Button } from '@mui/material';
+import Dialog from '@mui/material/Dialog';
+import DialogActions from '@mui/material/DialogActions';
+import DialogContent from '@mui/material/DialogContent';
+import DialogContentText from '@mui/material/DialogContentText';
+
 
 Modal.setAppElement('#root'); // Bind modal to the app root
 
-const DetailModal = ({ isOpen, onRequestClose,selectedMember }) => {
+const DetailModal = ({ isOpen, onRequestClose,selectedMember,dialogOpen }) => {
   const [showEdit,setEditScreen] = useState(false);
   //const [inputs, setInputs] = useState({});
   const [name, setName] = useState(selectedMember);
@@ -14,7 +19,7 @@ const DetailModal = ({ isOpen, onRequestClose,selectedMember }) => {
   const [spouse, setSpouse] = useState(selectedMember);
   const [otherinfo, setOtherInfo] = useState(selectedMember);
   const [knownas, setKnownAs] = useState(selectedMember);
-  
+  const [open, setOpen] = useState(false);
   //const [children,setAddChild]=useState(selectedMember);
   const onEditClick = () =>{
     console.log("edit screen");
@@ -26,7 +31,13 @@ const DetailModal = ({ isOpen, onRequestClose,selectedMember }) => {
     setEditScreen(false);
   };
 
-  const onAddChild = (selectedMember) =>{
+  const onCloseDialog = () =>{
+    console.log("close dialog screen");
+    setOpen(false);
+  };
+
+
+  const onAddChild = async (selectedMember) =>{
     console.log(selectedMember);
     var res='';
     if(selectedMember.children.length>0)
@@ -45,7 +56,27 @@ const DetailModal = ({ isOpen, onRequestClose,selectedMember }) => {
     
     //setAddChild(addChildToTree(selectedMember));
     console.log(selectedMember);
+    try {
+      const response = await fetch('https://pangmiclan-webapi.azurewebsites.net/api/FamilyTree/put/'+selectedMember.id.charAt(0), {
+        //const response = await fetch('https://localhost:7208/api/FamilyTree/put/'+selectedMember.id.charAt(0), {
+        method: 'PUT',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(selectedMember)
+      });
+      setEditScreen(false);
+      if (!response.ok) {
+        throw new Error('Network response was not ok');
+      }
 
+      //const updatedNode = await response.json();
+      //onUpdate(node.id, updatedNode);
+    } catch (error) {
+      console.error('There was a problem with the fetch operation:', error);
+    }
+    setEditScreen(false);
+    setOpen(true);
   };
 /*
   const handleChange = (event) => {
@@ -65,16 +96,22 @@ const DetailModal = ({ isOpen, onRequestClose,selectedMember }) => {
     console.log(selectedMember);
     
     try {
-      const response = await fetch('https://pangmiclan-webapi.azurewebsites.net/api/FamilyTree/put/'+selectedMember.id, {
+      const response = await fetch('https://pangmiclan-webapi.azurewebsites.net/api/FamilyTree/put/'+selectedMember.id.charAt(0), {
+       // const response = await fetch('https://localhost:7208/api/FamilyTree/put/'+selectedMember.id.charAt(0), {
         method: 'PUT',
         headers: {
           'Content-Type': 'application/json'
         },
         body: JSON.stringify(selectedMember)
+        
       });
-      setEditScreen(false);
+      
       if (!response.ok) {
         throw new Error('Network response was not ok');
+      }
+      else
+      {
+        setEditScreen(false);
       }
 
       //const updatedNode = await response.json();
@@ -89,23 +126,27 @@ const DetailModal = ({ isOpen, onRequestClose,selectedMember }) => {
     <Modal
       isOpen={isOpen}
       onRequestClose={onRequestClose}
-      contentLabel="Node Details"
-      style={{
-        content: {
-          top: '50%',
-          left: '50%',
-          right: 'auto',
-          bottom: 'auto',
-          marginRight: '-50%',
-          transform: 'translate(-50%, -50%)',
-          maxWidth: '90%',
-          width: '80%',
-          height: '50%',
-          padding: '20px',
-        },
-      }}
-    >
 
+      contentLabel="Node Details"
+      class="modalDetail"
+    >
+      <Dialog
+        open={open}
+        onClose={() => onCloseDialog()}  
+        aria-labelledby="alert-dialog-title"
+        aria-describedby="alert-dialog-description"
+      >
+       
+        <DialogContent>
+          <DialogContentText id="alert-dialog-description">
+            A Child has been added. Please enter the information manually. 
+          </DialogContentText>
+        </DialogContent>
+        <DialogActions>
+          <Button onClick={() => onCloseDialog()} >Close</Button>
+         
+        </DialogActions>
+      </Dialog>  
 <span style={{display: 'flex', justifyContent: 'right'}}>
        <FontAwesomeIcon icon={faClose} onClick={onRequestClose}  />
     </span>   
@@ -124,7 +165,8 @@ const DetailModal = ({ isOpen, onRequestClose,selectedMember }) => {
             </p>
             {selectedMember.children.length > 0 && (
             <div>
-              <h3>Children:</h3>
+              <h4>Children:</h4>
+              
               <ul>
                 {selectedMember.children.map(child => (
                   <li key={child.id}>{child.name}</li>
@@ -201,6 +243,8 @@ const DetailModal = ({ isOpen, onRequestClose,selectedMember }) => {
           <TextField id="otherinfo" name="otherinfo" label="Other Info"
                       value={selectedMember.otherinfo}
                       style={{ width: 350 }}
+                      multiline
+                      rows={4}
                       onChange={
                         (event)=>{
                           const val=event.target.value;
