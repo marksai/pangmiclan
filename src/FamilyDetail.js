@@ -7,6 +7,10 @@ import Dialog from '@mui/material/Dialog';
 import DialogActions from '@mui/material/DialogActions';
 import DialogContent from '@mui/material/DialogContent';
 import DialogContentText from '@mui/material/DialogContentText';
+import PhotoUpload from './PhotoUpload';
+import Grid from '@mui/material/Grid';
+import Box from '@mui/material/Box';
+import Image from './img/Portrait_placeholder.png';
 
 
 Modal.setAppElement('#root'); // Bind modal to the app root
@@ -20,7 +24,12 @@ const DetailModal = ({ isOpen, onRequestClose,selectedMember,dialogOpen }) => {
   const [otherinfo, setOtherInfo] = useState(selectedMember);
   const [knownas, setKnownAs] = useState(selectedMember);
   const [open, setOpen] = useState(false);
+  const [photoUrl,setPhotoUrl]=useState("");
   //const [children,setAddChild]=useState(selectedMember);
+
+  const handleUpload = url =>{
+    setPhotoUrl(url);
+  }
   const onEditClick = () =>{
     console.log("edit screen");
     setEditScreen(true);
@@ -150,19 +159,21 @@ const DetailModal = ({ isOpen, onRequestClose,selectedMember,dialogOpen }) => {
 <span style={{display: 'flex', justifyContent: 'right'}}>
        <FontAwesomeIcon icon={faClose} onClick={onRequestClose}  />
     </span>   
-{!showEdit && <div className="member-details">
-          <h4>Details for {selectedMember.name}  <FontAwesomeIcon icon={faEdit} className="edit-icon" onClick={() => onEditClick()}  /></h4>
+        {!showEdit && <div className="member-details">
+          {selectedMember.id == "1" && <a href="">Add Parent</a>}
+          <h4>Details for {selectedMember.name} <FontAwesomeIcon icon={faEdit} className="edit-icon" onClick={() => onEditClick()}  /></h4>
 
-         
-     
-          <p>
-            <strong>Name: </strong>{selectedMember.name} <br />
+          <Box sx={{ flexGrow: 1 }}>
+          <Grid container spacing={2}>
+          <Grid item xs={8} sm={6}>
+           <div>
+           <strong>Name: </strong>{selectedMember.name} <br />
             <strong>Born:</strong>{selectedMember.dob? selectedMember.dob : 'N/A'}<br />
             <strong>Known As:</strong>{selectedMember.knownas? selectedMember.knownas : 'N/A'}<br />
             <strong>Spouse:</strong> {selectedMember.spouse ? selectedMember.spouse : 'N/A'}<br />
             <strong>Other Info:</strong> {selectedMember.otherinfo ? selectedMember.otherinfo : 'N/A'}
+           </div>
             
-            </p>
             {selectedMember.children.length > 0 && (
             <div>
               <h4>Children:</h4>
@@ -172,10 +183,23 @@ const DetailModal = ({ isOpen, onRequestClose,selectedMember,dialogOpen }) => {
                   <li key={child.id}>{child.name}</li>
                 ))}
               </ul>
-            </div>
-        
-            
+            </div>          
           )}
+      
+          </Grid>
+          <Grid item xs={4} sm={6}>
+          {photoUrl ? (
+            <img className='photoImg' src={photoUrl} alt={`${name}'s photo`} />
+          ) : (
+           <img className='photoImg' src={Image}/>
+          )}
+          <br />
+          {/* <PhotoUpload onUpload={handleUpload} /> */}
+          </Grid>
+          </Grid>
+          </Box>
+
+   
             <br />
             <Button variant="contained" color="secondary" type="button" onClick={() => onAddChild(selectedMember)}> 
                     Add Child
@@ -189,7 +213,8 @@ const DetailModal = ({ isOpen, onRequestClose,selectedMember,dialogOpen }) => {
           <p>
           <TextField id="name" name="name" label="Name"
                       value={selectedMember.name}
-                      style={{ width: 350 }}
+                      //style={{ width: 350 }}
+                      fullWidth 
                       onChange={
                         (event)=>{
                           const val=event.target.value;
@@ -202,7 +227,7 @@ const DetailModal = ({ isOpen, onRequestClose,selectedMember,dialogOpen }) => {
           <br /> <br />
           <TextField id="name" name="knownas" label="Known As"
                       value={selectedMember.knownas}
-                      style={{ width: 350 }}
+                      fullWidth
                       onChange={
                         (event)=>{
                           const val=event.target.value;
@@ -215,7 +240,7 @@ const DetailModal = ({ isOpen, onRequestClose,selectedMember,dialogOpen }) => {
           <br /> <br />
           <TextField id="dob" name="dob" label="Born in (year)"
                       value={selectedMember.dob}
-                      style={{ width: 350 }}
+                      fullWidth
                       onChange={
                         (event)=>{
                           const val=event.target.value;
@@ -229,7 +254,7 @@ const DetailModal = ({ isOpen, onRequestClose,selectedMember,dialogOpen }) => {
           <br /> <br />
           <TextField id="spouse" name="spouse" label="Spouse"
                       value={selectedMember.spouse}
-                      style={{ width: 350 }}
+                      fullWidth
                       onChange={
                         (event)=>{
                           const val=event.target.value;
@@ -242,7 +267,7 @@ const DetailModal = ({ isOpen, onRequestClose,selectedMember,dialogOpen }) => {
           <br /> <br />
           <TextField id="otherinfo" name="otherinfo" label="Other Info"
                       value={selectedMember.otherinfo}
-                      style={{ width: 350 }}
+                      fullWidth
                       multiline
                       rows={4}
                       onChange={

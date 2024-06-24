@@ -18,6 +18,7 @@ const FamilyMember = ({ member, onSelect }) => {
 
   const onEditClick = (member) =>{
     console.log("modal open");
+    console.log(member);
     //setCurrentNode({ member });
     setModalIsOpen(true);
   };
