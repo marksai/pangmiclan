@@ -1,15 +1,15 @@
 {
   "files": {
     "main.css": "/pangmiclan/static/css/main.8768926c.css",
-    "main.js": "/pangmiclan/static/js/main.6c92d4f8.js",
+    "main.js": "/pangmiclan/static/js/main.4c8142da.js",
     "static/js/453.6ebab931.chunk.js": "/pangmiclan/static/js/453.6ebab931.chunk.js",
     "index.html": "/pangmiclan/index.html",
     "main.8768926c.css.map": "/pangmiclan/static/css/main.8768926c.css.map",
-    "main.6c92d4f8.js.map": "/pangmiclan/static/js/main.6c92d4f8.js.map",
+    "main.4c8142da.js.map": "/pangmiclan/static/js/main.4c8142da.js.map",
     "453.6ebab931.chunk.js.map": "/pangmiclan/static/js/453.6ebab931.chunk.js.map"
   },
   "entrypoints": [
     "static/css/main.8768926c.css",
-    "static/js/main.6c92d4f8.js"
+    "static/js/main.4c8142da.js"
   ]
 }
